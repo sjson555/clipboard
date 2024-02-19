@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import ClipboardItemCard from "./ClipboardItemCard";
-import useClipboard from "./useClipboard";
+import useClipboard from "../hooks/useClipboard";
 
 function App() {
   const { clipboardText, clipboardImage, error, getClipboardData } =
     useClipboard();
   const [showDetailModal, setShowDetailModal] = useState(false);
-
-  useEffect(() => {
-    getClipboardData();
-  }, [getClipboardData]);
 
   const handleViewDetail = () => {
     setShowDetailModal(true);
@@ -22,11 +18,11 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <Container>
       <h1 className="mt-5">Clipboard App</h1>
-      <button className="btn btn-primary mt-3" onClick={getClipboardData}>
+      <Button className="btn btn-primary mt-3" onClick={getClipboardData}>
         클립보드 데이터 가져오기
-      </button>
+      </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {(clipboardText || clipboardImage) && (
         <ClipboardItemCard
@@ -50,7 +46,7 @@ function App() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </Container>
   );
 }
 
