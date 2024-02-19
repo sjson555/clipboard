@@ -13,7 +13,9 @@ const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
 }) => {
   return (
     <Card className="shadow-sm" style={{ width: "18rem", margin: "10px" }}>
-      {imageUrl && <Card.Img variant="top" src={imageUrl} />}
+      {imageUrl && (
+        <Card.Img variant="top" src={imageUrl} style={{ objectFit: "cover" }} />
+      )}
       <Card.Body className="d-flex flex-column justify-content-between">
         <Button variant="primary" className="mt-auto" onClick={onViewDetail}>
           자세히 보기

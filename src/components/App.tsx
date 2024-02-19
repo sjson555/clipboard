@@ -37,8 +37,20 @@ function App() {
           <Modal.Title>자세히 보기</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {clipboardText && <p>텍스트: {clipboardText}</p>}
-          {clipboardImage && <img src={clipboardImage} alt="Clipboard" />}
+          {clipboardText && (
+            <p style={{ wordWrap: "break-word" }}>{clipboardText}</p>
+          )}
+          {clipboardImage && (
+            <img
+              src={clipboardImage}
+              alt="Clipboard"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "calc(100vh - 200px)",
+                width: "auto",
+              }}
+            />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
