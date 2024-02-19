@@ -32,7 +32,7 @@ function App() {
         />
       )}
 
-      <Modal show={showDetailModal} onHide={handleCloseModal}>
+      <Modal show={showDetailModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>자세히 보기</Modal.Title>
         </Modal.Header>
@@ -45,9 +45,8 @@ function App() {
               src={clipboardImage}
               alt="Clipboard"
               style={{
-                maxWidth: "100%",
-                maxHeight: "calc(100vh - 200px)",
-                width: "auto",
+                width: "100%",
+                height: "auto",
               }}
             />
           )}
