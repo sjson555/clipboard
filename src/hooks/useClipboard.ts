@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-function useClipboard() {
+interface ClipboardData {
+  clipboardText: string;
+  clipboardImage: string | null;
+  error: string;
+  getClipboardData: () => void;
+}
+
+function useClipboard(): ClipboardData {
   const [clipboardText, setClipboardText] = useState("");
   const [clipboardImage, setClipboardImage] = useState<string | null>(null);
   const [error, setError] = useState("");

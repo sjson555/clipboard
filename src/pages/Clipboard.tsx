@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Container } from "react-bootstrap";
-import ClipboardItemCard from "./ClipboardItemCard";
+import ClipboardItemCard from "../components/ClipboardItemCard";
 import useClipboard from "../hooks/useClipboard";
 
-function App() {
+function Clipboard() {
   const { clipboardText, clipboardImage, error, getClipboardData } =
     useClipboard();
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -26,8 +26,8 @@ function App() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {(clipboardText || clipboardImage) && (
         <ClipboardItemCard
-          text={clipboardText}
-          imageUrl={clipboardImage ? clipboardImage : undefined}
+          text={clipboardText || ""}
+          imageUrl={clipboardImage || ""}
           onViewDetail={handleViewDetail}
         />
       )}
@@ -61,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default Clipboard;

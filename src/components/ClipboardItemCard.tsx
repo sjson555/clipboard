@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 interface ClipboardItemCardProps {
   text?: string;
   imageUrl?: string;
-  onViewDetail: () => void;
+  onViewDetail?: () => void;
 }
 
 const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
