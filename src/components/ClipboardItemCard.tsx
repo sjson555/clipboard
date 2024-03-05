@@ -10,7 +10,7 @@ const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
   item,
   onViewDetail,
 }) => {
-  const isImageUrl = item.startsWith("http") || item.startsWith("data:image");
+  const isImageUrl = item.startsWith("data:image");
   const truncatedText =
     item.length > 100 ? item.substring(0, 100) + "..." : item;
 

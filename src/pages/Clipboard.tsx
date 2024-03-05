@@ -10,9 +10,21 @@ const Clipboard: React.FC = () => {
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
-  const handleViewDetail = (item: string): void => {
-    setSelectedItem(item);
+  const handleViewDetail = (item: string | ArrayBuffer): void => {
+    if (typeof item === "string") {
+      setSelectedItem(item);
+    } else {
+      const convertedItem = arrayBufferToString(item);
+      setSelectedItem(convertedItem);
+    }
     setShowDetailModal(true);
+  };
+
+  const arrayBufferToString = (buffer: ArrayBuffer): string => {
+    const uintArray = new Uint8Array(buffer);
+    const array = Array.from(uintArray);
+    const binary = String.fromCharCode.apply(null, array);
+    return btoa(binary);
   };
 
   const handleCloseModal = (): void => {
@@ -20,8 +32,8 @@ const Clipboard: React.FC = () => {
   };
 
   return (
-    <Container>
-      <h1 className="mt-5">Clipboard App</h1>
+    <Container className="my-24 d-flex flex-column align-items-center">
+      <h1 className="">Clipboard</h1>
       <Button className="btn btn-dark mt-3 " onClick={getClipboardData}>
         클립보드 데이터 가져오기
       </Button>
@@ -29,7 +41,7 @@ const Clipboard: React.FC = () => {
       {clipboardItems.map((item, index) => (
         <ClipboardItemCard
           key={index}
-          item={item}
+          item={typeof item === "string" ? item : ""}
           onViewDetail={() => handleViewDetail(item)}
         />
       ))}

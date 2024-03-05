@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 export interface ClipboardData {
-  clipboardItems: string[]; 
+  clipboardItems: (string | ArrayBuffer)[]; 
   error: string;
   getClipboardData: () => void;
 }
 
 function useClipboard(): ClipboardData {
-  const [clipboardItems, setClipboardItems] = useState<string[]>([]); 
+  const [clipboardItems, setClipboardItems] = useState<(string | ArrayBuffer)[]>([]); 
   const [error, setError] = useState("");
 
   const getClipboardData = async () => {
@@ -21,7 +21,11 @@ function useClipboard(): ClipboardData {
       } else if (latestItem.types.includes("image/png")) {
         const imageBlob = await latestItem.getType("image/png");
         const imageUrl = URL.createObjectURL(imageBlob);
-        setClipboardItems(prevItems => [...prevItems, imageUrl]); 
+        const reader = new FileReader();
+        reader.onload = () => {
+          setClipboardItems(prevItems => [...prevItems, reader.result as string | ArrayBuffer]); 
+        };
+        reader.readAsDataURL(imageBlob);
       }
     } catch (error) {
       setError("클립보드 데이터를 읽는 데 실패했습니다.");
