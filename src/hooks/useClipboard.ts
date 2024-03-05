@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 export interface ClipboardData {
-  clipboardItems: string[]; // 배열로 클립보드 데이터 저장
+  clipboardItems: string[]; 
   error: string;
   getClipboardData: () => void;
 }
 
 function useClipboard(): ClipboardData {
-  const [clipboardItems, setClipboardItems] = useState<string[]>([]); // 클립보드 아이템 배열
+  const [clipboardItems, setClipboardItems] = useState<string[]>([]); 
   const [error, setError] = useState("");
 
   const getClipboardData = async () => {
@@ -17,11 +17,11 @@ function useClipboard(): ClipboardData {
       if (latestItem.types.includes("text/plain")) {
         const textBlob = await latestItem.getType("text/plain");
         const text = await textBlob.text();
-        setClipboardItems(prevItems => [...prevItems, text]); // 이전 아이템과 새로운 텍스트를 합쳐 배열에 추가
+        setClipboardItems(prevItems => [...prevItems, text]); 
       } else if (latestItem.types.includes("image/png")) {
         const imageBlob = await latestItem.getType("image/png");
         const imageUrl = URL.createObjectURL(imageBlob);
-        setClipboardItems(prevItems => [...prevItems, imageUrl]); // 이전 아이템과 새로운 이미지 URL을 합쳐 배열에 추가
+        setClipboardItems(prevItems => [...prevItems, imageUrl]); 
       }
     } catch (error) {
       setError("클립보드 데이터를 읽는 데 실패했습니다.");

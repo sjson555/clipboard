@@ -8,10 +8,10 @@ const Clipboard: React.FC = () => {
   const { clipboardItems, error, getClipboardData }: ClipboardData =
     useClipboard();
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<string | null>(null); // 선택한 클립보드 아이템
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const handleViewDetail = (item: string): void => {
-    setSelectedItem(item); // 클립보드 아이템 선택
+    setSelectedItem(item);
     setShowDetailModal(true);
   };
 
@@ -30,7 +30,7 @@ const Clipboard: React.FC = () => {
         <ClipboardItemCard
           key={index}
           item={item}
-          onViewDetail={() => handleViewDetail(item)} // 각 클립보드 아이템에 대한 자세히 보기 이벤트 핸들러 추가
+          onViewDetail={() => handleViewDetail(item)}
         />
       ))}
 
@@ -41,14 +41,14 @@ const Clipboard: React.FC = () => {
         <Modal.Body>
           {selectedItem && (
             <>
-              {selectedItem.startsWith("data:image") ? ( // 선택한 아이템이 이미지인 경우 이미지로 렌더링
+              {selectedItem.startsWith("data:image") ? (
                 <img
                   src={selectedItem}
                   alt="Clipboard"
                   style={{ width: "100%", height: "auto" }}
                 />
               ) : (
-                <p style={{ wordWrap: "break-word" }}>{selectedItem}</p> // 선택한 아이템이 텍스트인 경우 텍스트로 렌더링
+                <p style={{ wordWrap: "break-word" }}>{selectedItem}</p>
               )}
             </>
           )}

@@ -2,8 +2,8 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 interface ClipboardItemCardProps {
-  item: string; // 클립보드 아이템은 문자열 형태로 전달됩니다.
-  onViewDetail: (item: string) => void; // 자세히 보기 이벤트 핸들러는 문자열을 인자로 받습니다.
+  item: string;
+  onViewDetail: (item: string) => void;
 }
 
 const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
