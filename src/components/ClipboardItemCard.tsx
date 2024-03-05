@@ -2,27 +2,30 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 interface ClipboardItemCardProps {
-  text?: string;
-  imageUrl?: string;
-  onViewDetail?: () => void;
+  item: string; // 클립보드 아이템은 문자열 형태로 전달됩니다.
+  onViewDetail: (item: string) => void; // 자세히 보기 이벤트 핸들러는 문자열을 인자로 받습니다.
 }
 
 const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
-  text,
-  imageUrl,
+  item,
   onViewDetail,
 }) => {
+  const isImageUrl = item.startsWith("http") || item.startsWith("data:image");
   const truncatedText =
-    text && text.length > 100 ? text.substring(0, 100) + "..." : text;
+    item.length > 100 ? item.substring(0, 100) + "..." : item;
 
   return (
     <Card className="shadow-sm" style={{ width: "18rem", margin: "10px" }}>
-      {imageUrl && (
-        <Card.Img variant="top" src={imageUrl} style={{ objectFit: "cover" }} />
+      {isImageUrl && (
+        <Card.Img variant="top" src={item} style={{ objectFit: "cover" }} />
       )}
       <Card.Body className="d-flex flex-column justify-content-between">
-        {text && <Card.Text>{truncatedText}</Card.Text>}
-        <Button variant="primary" className="mt-auto" onClick={onViewDetail}>
+        {!isImageUrl && <Card.Text>{truncatedText}</Card.Text>}
+        <Button
+          variant="primary"
+          className="mt-auto"
+          onClick={() => onViewDetail(item)}
+        >
           자세히 보기
         </Button>
       </Card.Body>
