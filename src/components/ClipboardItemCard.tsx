@@ -23,7 +23,7 @@ const ClipboardItemCard: React.FC<ClipboardItemCardProps> = ({
         {!isImageUrl && <Card.Text>{truncatedText}</Card.Text>}
         <Button
           variant="primary"
-          className="mt-auto"
+          className="mt-auto btn btn-dark"
           onClick={() => onViewDetail(item)}
         >
           자세히 보기

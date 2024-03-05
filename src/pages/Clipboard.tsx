@@ -38,13 +38,15 @@ const Clipboard: React.FC = () => {
         클립보드 데이터 가져오기
       </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {clipboardItems.map((item, index) => (
-        <ClipboardItemCard
-          key={index}
-          item={typeof item === "string" ? item : ""}
-          onViewDetail={() => handleViewDetail(item)}
-        />
-      ))}
+      <div className="d-flex flex-wrap">
+        {clipboardItems.map((item, index) => (
+          <ClipboardItemCard
+            key={index}
+            item={typeof item === "string" ? item : ""}
+            onViewDetail={() => handleViewDetail(item)}
+          />
+        ))}
+      </div>
 
       <Modal show={showDetailModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
