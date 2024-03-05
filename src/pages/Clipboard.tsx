@@ -10,6 +10,13 @@ const Clipboard: React.FC = () => {
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
+  const arrayBufferToString = (buffer: ArrayBuffer): string => {
+    const uintArray = new Uint8Array(buffer);
+    const array = Array.from(uintArray);
+    const binary = String.fromCharCode.apply(null, array);
+    return btoa(binary);
+  };
+
   const handleViewDetail = (item: string | ArrayBuffer): void => {
     if (typeof item === "string") {
       setSelectedItem(item);
@@ -18,13 +25,6 @@ const Clipboard: React.FC = () => {
       setSelectedItem(convertedItem);
     }
     setShowDetailModal(true);
-  };
-
-  const arrayBufferToString = (buffer: ArrayBuffer): string => {
-    const uintArray = new Uint8Array(buffer);
-    const array = Array.from(uintArray);
-    const binary = String.fromCharCode.apply(null, array);
-    return btoa(binary);
   };
 
   const handleCloseModal = (): void => {

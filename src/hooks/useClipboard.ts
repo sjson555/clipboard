@@ -20,7 +20,6 @@ function useClipboard(): ClipboardData {
         setClipboardItems(prevItems => [...prevItems, text]); 
       } else if (latestItem.types.includes("image/png")) {
         const imageBlob = await latestItem.getType("image/png");
-        const imageUrl = URL.createObjectURL(imageBlob);
         const reader = new FileReader();
         reader.onload = () => {
           setClipboardItems(prevItems => [...prevItems, reader.result as string | ArrayBuffer]); 
