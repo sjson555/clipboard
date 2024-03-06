@@ -1,5 +1,3 @@
-// Clipboard 컴포넌트 수정
-
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Container } from "react-bootstrap";
