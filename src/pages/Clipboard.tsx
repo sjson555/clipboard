@@ -1,8 +1,11 @@
+// Clipboard 컴포넌트 수정
+
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Container } from "react-bootstrap";
 import ClipboardItemCard from "../components/ClipboardItemCard";
 import useClipboard, { ClipboardData } from "../hooks/useClipboard";
+import axios from "axios";
 
 const Clipboard: React.FC = () => {
   const { clipboardItems, error, getClipboardData }: ClipboardData =
@@ -31,11 +34,23 @@ const Clipboard: React.FC = () => {
     setShowDetailModal(false);
   };
 
+  const saveToServer = async () => {
+    try {
+      const latestClipboardItem = clipboardItems[0]; // 최신 클립보드 아이템 가져오기
+      await axios.post("/clipboard", { clipboardData: latestClipboardItem }); // 서버로 POST 요청 보내기
+    } catch (error) {
+      console.error("Error saving clipboard data to server:", error);
+    }
+  };
+
   return (
     <Container className="my-24 d-flex flex-column align-items-center">
       <h1 className="">Clipboard</h1>
       <Button className="btn btn-dark mt-3 " onClick={getClipboardData}>
         클립보드 데이터 가져오기
+      </Button>
+      <Button className="btn btn-dark mt-3 " onClick={saveToServer}>
+        보관
       </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="d-flex flex-wrap">
